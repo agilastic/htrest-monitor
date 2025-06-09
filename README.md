@@ -61,11 +61,6 @@ This application provides the following core functionalities, designed to meet t
     -   Configures domestic hot water temperature settings.
     -   Implements input validation for numerical ranges and enumerated modes.
 
--   **API Tester (Admin-only) (`ANF-F-018`)**:
-    -   A dedicated view for developers/administrators to execute raw API commands (e.g., `GET /values`, `POST /set`).
-
--   **Temperature Visualization (`ANF-F-017`)**:
-    -   Utilizes Chart.js with `vue-chartjs` for graphical representation of temperature trends over time (`ANF-NF-004`).
 
 -   **Responsive UI (`ANF-NF-001`)**:
     -   The user interface is designed to be responsive and user-friendly across both mobile and desktop devices.
@@ -245,6 +240,34 @@ The following features are considered optional and may be implemented in future 
 
 -   This project is built to interface with the [HtREST API](https://github.com/dstrigl/HtREST).
 -   Inspired by the detailed requirements laid out in `Pflichtenheft.md`.
+
+
+## Screenshots
+
+### Screenshot 1
+![Screenshot 1](screenshots/sc1.png)
+
+### Screenshot 2
+![Screenshot 2](screenshots/sc2.png)
+
+### Screenshot 3
+![Screenshot 3](screenshots/sc3.png)
+
+### Screenshot 4
+![Screenshot 4](screenshots/sc4.png)
+
+### Screenshot 5
+![Screenshot 5](screenshots/sc5.png)
+
+### Screenshot 6
+![Screenshot 6](screenshots/sc6.png)
+
+### Screenshot 7
+![Screenshot 7](screenshots/sc7.png)
+
+### Screenshot 8
+![Screenshot 8](screenshots/sc8.png)
+
 
 ## License
 
