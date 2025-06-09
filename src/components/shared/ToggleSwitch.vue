@@ -69,6 +69,7 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s ease;
   outline: none;
+  flex-shrink: 0;
 }
 
 .toggle-switch:focus {

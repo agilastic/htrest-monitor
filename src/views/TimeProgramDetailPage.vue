@@ -696,46 +696,7 @@ onMounted(() => {
   font-size: 0.875rem;
 }
 
-.toggle-switch {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-}
-
-.toggle-switch input {
-  margin: 0;
-}
-
-.toggle-slider {
-  position: relative;
-  width: 40px;
-  height: 20px;
-  background: var(--danger-color);
-  border-radius: 10px;
-  transition: background 0.2s;
-}
-
-.toggle-switch input:checked + .toggle-slider {
-  background: var(--success-color);
-}
-
-.toggle-slider::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
-  background: white;
-  border-radius: 50%;
-  transition: transform 0.2s;
-}
-
-.toggle-switch input:checked + .toggle-slider::after {
-  transform: translateX(20px);
-}
-
+/* Toggle switches use global styles from components.css */
 .toggle-label {
   font-size: 0.875rem;
   font-weight: 600;

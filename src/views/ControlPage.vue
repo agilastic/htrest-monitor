@@ -431,71 +431,9 @@ button:disabled {
   font-weight: bold;
 }
 
-/* Toggle Switch Styles - Using global styles */
+/* Toggle Group Spacing */
 .toggle-group {
   margin-bottom: 15px;
-}
-
-.toggle-switch {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.toggle-switch input[type="checkbox"] {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle-slider {
-  position: relative;
-  cursor: pointer;
-  width: 60px;
-  height: 34px;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-}
-
-.toggle-slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-.toggle-switch input:checked + .toggle-slider {
-  background-color: var(--primary-color);
-}
-
-.toggle-switch input:focus + .toggle-slider {
-  box-shadow: 0 0 1px var(--primary-color);
-}
-
-.toggle-switch input:checked + .toggle-slider:before {
-  transform: translateX(26px);
-}
-
-.toggle-switch input:disabled + .toggle-slider {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.toggle-label {
-  margin-left: 60px;
-  font-weight: 500;
-  font-size: 1em;
-  white-space: nowrap;
-  min-width: auto;
-  color: #333;
 }
 
 /* Holiday Settings */
