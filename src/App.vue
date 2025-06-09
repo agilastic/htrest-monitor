@@ -41,7 +41,7 @@ body {
 }
 
 .main-content.with-header {
-  margin-top: 0;
+  margin-top: 60px;
   width: 100%;
   max-width: 100%;
 }

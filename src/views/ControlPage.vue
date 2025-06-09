@@ -3,7 +3,7 @@
     <div class="page-header">
       <h1>System Control Panel</h1>
       <button @click="refreshStatus" class="btn btn-secondary" :disabled="isRefreshing">
-        <span v-if="isRefreshing">Refreshing...</span>
+        <span v-if="isRefreshing">Loading...</span>
         <span v-else>Refresh Status</span>
       </button>
     </div>
@@ -13,12 +13,11 @@
     </div>
 
     <div class="control-section">
-      <h2>Zieltemperatur einstellen</h2>
-      
+      <h2>Raumtemperatur</h2>
+
       <div v-if="currentTempLoading" class="current-temp-loading">
-        <Spinner message="Lade aktuelle Temperatur..." />
       </div>
-      
+
       <div v-else class="current-temp-display">
         <p class="current-temp-info">
           <strong>Aktuelle Zieltemperatur:</strong> 
@@ -475,7 +474,7 @@ button:disabled {
   font-weight: bold;
 }
 
-/* Toggle Switch Styles */
+/* Toggle Switch Styles - Using global styles */
 .toggle-group {
   margin-bottom: 15px;
 }
@@ -486,39 +485,51 @@ button:disabled {
   gap: 12px;
   cursor: pointer;
   user-select: none;
+  position: relative;
+  width: 60px;
+  height: 34px;
 }
 
 .toggle-switch input[type="checkbox"] {
-  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .toggle-slider {
-  position: relative;
-  width: 50px;
-  height: 25px;
-  background: #ccc;
-  border-radius: 25px;
-  transition: background 0.3s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
 }
 
-.toggle-slider::after {
-  content: '';
+.toggle-slider:before {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 21px;
-  height: 21px;
-  background: white;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
   border-radius: 50%;
-  transition: transform 0.3s;
 }
 
 .toggle-switch input:checked + .toggle-slider {
-  background: #007bff;
+  background-color: var(--primary-color);
 }
 
-.toggle-switch input:checked + .toggle-slider::after {
-  transform: translateX(25px);
+.toggle-switch input:focus + .toggle-slider {
+  box-shadow: 0 0 1px var(--primary-color);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(26px);
 }
 
 .toggle-switch input:disabled + .toggle-slider {
@@ -529,6 +540,7 @@ button:disabled {
 .toggle-label {
   font-weight: 500;
   font-size: 1em;
+  margin-left: 75px; /* Account for toggle width */
 }
 
 /* Holiday Settings */

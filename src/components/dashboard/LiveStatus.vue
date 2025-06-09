@@ -404,7 +404,6 @@ onUnmounted(() => {
   animation: spin 1s linear infinite;
 }
 
-.loading-container,
 .error-container {
   display: flex;
   flex-direction: column;
@@ -414,7 +413,7 @@ onUnmounted(() => {
   gap: 1rem;
 }
 
-.error-message {
+.error-container .error-message {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -424,74 +423,6 @@ onUnmounted(() => {
 
 .retry-btn {
   margin-top: 0.5rem;
-}
-
-.status-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.status-card {
-  background: var(--surface-color);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-}
-
-.status-card h3 {
-  margin: 0 0 1rem 0;
-  color: var(--text-color);
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
-}
-
-.temp-values,
-.system-values,
-.performance-values {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.temp-item,
-.status-item,
-.metric-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.temp-item:last-child,
-.status-item:last-child,
-.metric-item:last-child {
-  border-bottom: none;
-}
-
-.temp-label,
-.status-label,
-.metric-label {
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.temp-value,
-.metric-value {
-  color: var(--text-color);
-  font-weight: 600;
-  font-family: monospace;
-}
-
-.status-indicator {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 500;
 }
 
 .alarms-container {
@@ -525,11 +456,6 @@ onUnmounted(() => {
   color: var(--text-muted);
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 /* Mobile responsive */
 @media (max-width: 768px) {
   .status-header {
@@ -542,15 +468,6 @@ onUnmounted(() => {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
-  }
-  
-  .status-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .status-card {
-    padding: 1rem;
   }
 }
 </style>

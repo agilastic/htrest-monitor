@@ -34,6 +34,18 @@
   --color-text: var(--vt-c-text-light-1);
 
   --section-gap: 160px;
+
+  /* Component system variables */
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --surface-color: var(--vt-c-white);
+  --bg-color: var(--vt-c-white-soft);
+  --border-color: var(--vt-c-divider-light-2);
+  --text-color: var(--vt-c-text-light-1);
+  --text-muted: var(--vt-c-text-light-2);
+  --success-color: #16a34a;
+  --danger-color: #dc2626;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -47,6 +59,13 @@
 
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
+
+    /* Component system variables for dark mode */
+    --surface-color: var(--vt-c-black-soft);
+    --bg-color: var(--vt-c-black);
+    --border-color: var(--vt-c-divider-dark-2);
+    --text-color: var(--vt-c-text-dark-1);
+    --text-muted: var(--vt-c-text-dark-2);
   }
 }
 
@@ -56,6 +75,10 @@
   box-sizing: border-box;
   margin: 0;
   font-weight: normal;
+}
+
+.main-content h1 {
+  color: #ffffff;
 }
 
 body {

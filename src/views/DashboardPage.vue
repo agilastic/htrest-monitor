@@ -161,7 +161,6 @@ onUnmounted(() => {
   padding: 20px;
   width: 100%;
   max-width: none;
-  background-color: #1e1e1e;
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

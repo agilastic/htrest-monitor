@@ -1,12 +1,12 @@
 <template>
-  <div class="spinner-container" :class="{ overlay: overlay }">
-    <div class="spinner" :class="size">
-      <div class="spinner-ring"></div>
-      <div class="spinner-ring"></div>
-      <div class="spinner-ring"></div>
-      <div class="spinner-ring"></div>
+  <div class="loading-container" :class="{ 'spinner-overlay': overlay }">
+    <div class="spinner" :class="[size, { simple: simple }]">
+      <div v-if="!simple" class="spinner-ring"></div>
+      <div v-if="!simple" class="spinner-ring"></div>
+      <div v-if="!simple" class="spinner-ring"></div>
+      <div v-if="!simple" class="spinner-ring"></div>
     </div>
-    <p v-if="message" class="spinner-message">{{ message }}</p>
+    <p v-if="message" class="loading-text">{{ message }}</p>
   </div>
 </template>
 
@@ -24,49 +24,16 @@ defineProps({
   overlay: {
     type: Boolean,
     default: false
+  },
+  simple: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
 
 <style scoped>
-.spinner-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.spinner-container.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
-
-.spinner {
-  position: relative;
-  display: inline-block;
-}
-
-.spinner.small {
-  width: 20px;
-  height: 20px;
-}
-
-.spinner.medium {
-  width: 40px;
-  height: 40px;
-}
-
-.spinner.large {
-  width: 60px;
-  height: 60px;
-}
-
+/* Custom spinner rings for multi-ring effect */
 .spinner-ring {
   position: absolute;
   border: 3px solid transparent;
@@ -117,40 +84,7 @@ defineProps({
   border-top-color: var(--danger-color);
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.spinner-message {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  text-align: center;
-  margin: 0;
-}
-
-.overlay .spinner-message {
+.spinner-overlay .loading-text {
   color: white;
-}
-
-/* Alternative simple spinner styles */
-.spinner.simple {
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-top: 3px solid var(--primary-color);
-  border-radius: 50%;
-  animation: spin-simple 1s linear infinite;
-}
-
-.spinner.simple .spinner-ring {
-  display: none;
-}
-
-@keyframes spin-simple {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 </style>
