@@ -38,14 +38,15 @@
   /* Component system variables */
   --primary-color: #2563eb;
   --primary-hover: #1d4ed8;
-  --surface-color: var(--vt-c-white);
-  --bg-color: var(--vt-c-white-soft);
-  --border-color: var(--vt-c-divider-light-2);
-  --text-color: var(--vt-c-text-light-1);
-  --text-muted: var(--vt-c-text-light-2);
-  --success-color: #16a34a;
-  --danger-color: #dc2626;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --bg-color: #f9fafb;
+  --surface-color: #ffffff;
+  --text-color: #111827;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -61,12 +62,34 @@
     --color-text: var(--vt-c-text-dark-2);
 
     /* Component system variables for dark mode */
-    --surface-color: var(--vt-c-black-soft);
-    --bg-color: var(--vt-c-black);
-    --border-color: var(--vt-c-divider-dark-2);
-    --text-color: var(--vt-c-text-dark-1);
-    --text-muted: var(--vt-c-text-dark-2);
+    --bg-color: #111827;
+    --surface-color: #1f2937;
+    --text-color: #f9fafb;
+    --text-muted: #9ca3af;
+    --border-color: #374151;
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   }
+}
+
+/* Dark theme override (for theme toggle) */
+[data-theme="dark"] {
+  --color-background: var(--vt-c-black);
+  --color-background-soft: var(--vt-c-black-soft);
+  --color-background-mute: var(--vt-c-black-mute);
+
+  --color-border: var(--vt-c-divider-dark-2);
+  --color-border-hover: var(--vt-c-divider-dark-1);
+
+  --color-heading: var(--vt-c-text-dark-1);
+  --color-text: var(--vt-c-text-dark-2);
+
+  /* Component system variables for dark mode */
+  --bg-color: #111827;
+  --surface-color: #1f2937;
+  --text-color: #f9fafb;
+  --text-muted: #9ca3af;
+  --border-color: #374151;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
 }
 
 *,
@@ -83,7 +106,8 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   transition:
     color 0.5s,
     background-color 0.5s;

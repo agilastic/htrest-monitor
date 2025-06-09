@@ -23,8 +23,6 @@ const authStore = useAuthStore()
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-color, #f5f5f5);
-  color: var(--text-color, #333);
 }
 
 #app {
@@ -46,22 +44,7 @@ body {
   max-width: 100%;
 }
 
-/* CSS Variables for theming */
-:root {
-  --primary-color: #2563eb;
-  --primary-hover: #1d4ed8;
-  --success-color: #10b981;
-  --warning-color: #f59e0b;
-  --danger-color: #ef4444;
-  --bg-color: #f9fafb;
-  --surface-color: #ffffff;
-  --text-color: #111827;
-  --text-muted: #6b7280;
-  --border-color: #e5e7eb;
-  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
-/* Dark theme */
+/* Theme-specific overrides */
 [data-theme="dark"] {
   --bg-color: #111827;
   --surface-color: #1f2937;

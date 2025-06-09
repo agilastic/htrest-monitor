@@ -33,8 +33,8 @@
 
       <div class="nav-actions">
         <button @click="toggleTheme" class="theme-toggle" title="Toggle theme">
-          <span v-if="isDark">THEME</span>
-          <span v-else>THEME</span>
+          <span v-if="isDark">🌙 Dark</span>
+          <span v-else>☀️ Light</span>
         </button>
         
         <div class="user-menu">
