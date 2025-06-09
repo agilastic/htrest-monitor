@@ -432,6 +432,7 @@ onMounted(() => {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #333;
 }
 .input-group input[type="number"],
 .input-group select {
@@ -485,9 +486,6 @@ button:disabled {
   gap: 12px;
   cursor: pointer;
   user-select: none;
-  position: relative;
-  width: 60px;
-  height: 34px;
 }
 
 .toggle-switch input[type="checkbox"] {
@@ -497,12 +495,10 @@ button:disabled {
 }
 
 .toggle-slider {
-  position: absolute;
+  position: relative;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 60px;
+  height: 34px;
   background-color: #ccc;
   transition: 0.4s;
   border-radius: 34px;
@@ -538,9 +534,12 @@ button:disabled {
 }
 
 .toggle-label {
+  margin-left: 60px;
   font-weight: 500;
   font-size: 1em;
-  margin-left: 75px; /* Account for toggle width */
+  white-space: nowrap;
+  min-width: auto;
+  color: #333;
 }
 
 /* Holiday Settings */

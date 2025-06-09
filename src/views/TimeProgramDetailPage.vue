@@ -739,7 +739,9 @@ onMounted(() => {
 .toggle-label {
   font-size: 0.875rem;
   font-weight: 600;
-  min-width: 30px;
+  min-width: 50px;
+  white-space: nowrap;
+  color: var(--text-color);
 }
 
 .add-entry-section {
