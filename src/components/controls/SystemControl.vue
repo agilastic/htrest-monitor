@@ -1,7 +1,5 @@
 <template>
   <div class="system-control">
-    <h2>System Control Panel</h2>
-    
     <div v-if="heatpumpStore.error" class="error-message">
       {{ heatpumpStore.error }}
     </div>
@@ -27,27 +25,36 @@
       <div class="control-group">
         <h3 class="control-subtitle">🔥 Hot Water Force</h3>
         <div class="force-controls">
-          <div class="force-status" :class="{ 'active': heatpumpStore.hotWaterForceActive }">
-            Status: {{ heatpumpStore.hotWaterForceActive ? 'ACTIVE' : 'INACTIVE' }}
+          <div class="force-status" :class="{ 'active': heatpumpStore.isHotWaterForceDetected }">
+            Status: {{ heatpumpStore.isHotWaterForceDetected ? 'ACTIVE' : 'INACTIVE' }}
+            <small v-if="heatpumpStore.allParameters">
+              ({{ heatpumpStore.allParameters['WW Normaltemp.'] }}°C / {{ heatpumpStore.allParameters['WW Hysterese Normaltemp.'] }}°C hysteresis)
+            </small>
+          </div>
+          <div class="time-program-status" v-if="heatpumpStore.warmwasserTimeProgramStatus">
+            Time Program ({{ getCurrentTimeSlot() }}): 
+            <span :class="{ 'enabled': heatpumpStore.warmwasserTimeProgramStatus.enabled }">
+              {{ heatpumpStore.warmwasserTimeProgramStatus.enabled ? 'ENABLED' : 'DISABLED' }}
+            </span>
           </div>
           <div class="button-group">
             <button 
               @click="forceHotWater"
-              :disabled="heatpumpStore.hotWaterForceLoading || heatpumpStore.hotWaterForceActive"
+              :disabled="heatpumpStore.hotWaterForceLoading || heatpumpStore.isHotWaterForceDetected"
               class="force-btn"
             >
               {{ heatpumpStore.hotWaterForceLoading ? 'Forcing...' : 'Force Hot Water (48°C)' }}
             </button>
             <button 
               @click="stopForceHotWater"
-              :disabled="heatpumpStore.hotWaterForceLoading || !heatpumpStore.hotWaterForceActive"
+              :disabled="heatpumpStore.hotWaterForceLoading || !heatpumpStore.isHotWaterForceDetected"
               class="stop-force-btn"
             >
               {{ heatpumpStore.hotWaterForceLoading ? 'Stopping...' : 'Stop Force' }}
             </button>
           </div>
           <div class="force-info">
-            <small>Force sets temp to 48°C with 2°C hysteresis. Stop resets to 46°C with 5°C hysteresis.</small>
+            <small>Force sets temp to 48°C with 2°C hysteresis and enables Warmwasser time program for current hour. Stop resets to 46°C with 5°C hysteresis.</small>
           </div>
         </div>
       </div>
@@ -132,10 +139,24 @@ watch(systemEnabled, async (newValue) => {
   }
 })
 
+// Helper function to format current time slot
+const getCurrentTimeSlot = () => {
+  const now = new Date()
+  const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  const currentDay = now.getDay()
+  const timeProgramDay = currentDay === 0 ? 6 : currentDay - 1
+  const currentHour = now.getHours()
+  
+  return `${dayNames[timeProgramDay]} ${currentHour}:00`
+}
+
 // Initialize component
 const refreshParameters = async () => {
   await heatpumpStore.fetchAllParameters()
   heatpumpStore.initializeControlParameters()
+  
+  // Check Warmwasser time program status
+  heatpumpStore.warmwasserTimeProgramStatus = await heatpumpStore.checkWarmwasserTimeProgramStatus()
   
   // Update local refs with store values
   targetTemp.value = heatpumpStore.targetTemperature
@@ -147,9 +168,14 @@ const refreshParameters = async () => {
 // Hot water force functions
 const forceHotWater = async () => {
   try {
+    console.log('Starting hot water force...')
     await heatpumpStore.forceHotWater(48)
+    console.log('Hot water force completed, checking status...')
     // Update local ref to reflect the forced temperature
     warmWaterTemp.value = 48
+    // Refresh time program status
+    heatpumpStore.warmwasserTimeProgramStatus = await heatpumpStore.checkWarmwasserTimeProgramStatus()
+    console.log('Time program status after force:', heatpumpStore.warmwasserTimeProgramStatus)
   } catch (error) {
     console.error('Failed to force hot water:', error)
   }
@@ -290,6 +316,25 @@ onMounted(() => {
 .force-status.active {
   background-color: var(--color-secondary, #FFC107);
   color: #000;
+}
+
+.time-program-status {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  background-color: var(--color-background, #fff);
+  border: 1px solid var(--color-border, #e0e0e0);
+  text-align: center;
+}
+
+.time-program-status .enabled {
+  color: var(--color-primary, #4CAF50);
+  font-weight: 600;
+}
+
+.time-program-status span:not(.enabled) {
+  color: var(--color-text-secondary, #666);
+  font-weight: 600;
 }
 
 .button-group {

@@ -20,11 +20,11 @@
         <h4>Außentemperatur</h4>
       </div>
 
-      <!-- System Status Tile -->
-      <div class="metro-tile medium-tile status-tile" :class="{'tile-success': !heatpumpStore.allParameters['Stoerung'], 'tile-error': heatpumpStore.allParameters['Stoerung']}">
-        <h3>System</h3>
-        <p>{{ heatpumpStore.allParameters['Stoerung'] ? 'STÖRUNG' : 'NORMAL' }}</p>
-        <small>{{ getOperatingModeText(heatpumpStore.allParameters['Betriebsart']) }}</small>
+      <!-- Operating Mode Tile -->
+      <div class="metro-tile large-tile operating-mode-tile" :class="getOperatingModeClass(heatpumpStore.allParameters['Betriebsart'])">
+        <h2>{{ formatOperatingMode('Betriebsart') }}</h2>
+        <h4>Betriebsart</h4>
+        <small>{{ heatpumpStore.allParameters['Stoerung'] ? 'STÖRUNG AKTIV' : 'System Normal' }}</small>
       </div>
 
       <!-- Compressor Status -->
@@ -89,9 +89,9 @@ function formatOperatingMode(key, fallback = '') {
   const val = heatpumpStore.allParameters[key];
 
   const betriebsarten = {
-    1: 'Warmwasser',
+    1: 'Standby',
     2: 'Heizen',
-    3: 'Standby'
+    3: 'Warmwasser'
   };
 
   if (key === 'Betriebsart') {
@@ -102,8 +102,10 @@ function formatOperatingMode(key, fallback = '') {
 }
 
 const startAutoRefresh = () => {
-  refreshInterval = setInterval(() => {
-    heatpumpStore.fetchAllParameters();
+  refreshInterval = setInterval(async () => {
+    await heatpumpStore.fetchAllParameters();
+    // Check if hot water force should be auto-stopped
+    await heatpumpStore.checkAndAutoStopForcing();
   }, 30000); // Alle 30 Sekunden
 };
 
@@ -138,11 +140,10 @@ const getOperatingModeText = (modeCode) => {
 
 const getOperatingModeClass = (modeCode) => {
   switch (modeCode) {
-    case 1: return 'status-ok'; // Heizen = OK
-    case 2: return 'status-info'; // Kühlen = Info
-    case 3: return 'status-info'; // Auto/Mixed = Info
-    case 0: return 'status-neutral'; // Aus = Neutral
-    default: return '';
+    case 1: return 'mode-standby'; //
+    case 2: return 'mode-heizen'; //
+    case 3: return 'mode-warmwasser'; // SAVE
+    default: return 'mode-unknown';
   }
 };
 
@@ -305,6 +306,27 @@ onUnmounted(() => {
 
 .info-tile {
   background: #6a00ff;
+}
+
+.operating-mode-tile {
+  background: #2d89ef;
+}
+
+/* Operating Mode Colors */
+.mode-warmwasser {
+  background: linear-gradient(135deg, #fa6800 0%, #ff8c00 100%) !important;
+}
+
+.mode-heizen {
+  background: linear-gradient(135deg, #e51400 0%, #ff4500 100%) !important;
+}
+
+.mode-standby {
+  background: linear-gradient(135deg, #737373 0%, #999999 100%) !important;
+}
+
+.mode-unknown {
+  background: linear-gradient(135deg, #6a00ff 0%, #8a2be2 100%) !important;
 }
 
 .parameters-tile {
