@@ -41,7 +41,7 @@ htrestApi.interceptors.response.use(response => response, error => {
 
 // Parameter API functions
 export const getParameters = () => htrestApi.get('/param/');
-export const setParameter = (paramId, value) => htrestApi.put(`/param/${paramId}`, { value });
+export const setParameter = (paramId, value) => htrestApi.put('/param/', { [paramId]: value });
 export const getParameter = (paramId) => htrestApi.get(`/param/${paramId}`);
 export const getFastQueryValues = () => htrestApi.get('/fastquery'); // Behalten, falls noch benötigt, aber Dashboard nutzt /param
 export const getFaultList = () => htrestApi.get('/faultlist/');

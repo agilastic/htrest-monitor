@@ -12,29 +12,8 @@
       <Spinner message="Loading current status..." />
     </div>
 
-    <div class="control-section">
-      <h2>Raumtemperatur</h2>
-
-      <div v-if="currentTempLoading" class="current-temp-loading">
-      </div>
-
-      <div v-else class="current-temp-display">
-        <p class="current-temp-info">
-          <strong>Aktuelle Zieltemperatur:</strong> 
-          <span class="current-temp-value">{{ currentTargetTemp }}°C</span>
-        </p>
-      </div>
-      
-      <div class="input-group">
-        <label for="targetTemp">Neue Zieltemperatur (°C):</label>
-        <input type="number" id="targetTemp" v-model.number="targetTemperature" step="0.1" min="15" max="30" />
-      </div>
-      <button @click="setTargetTemperature" :disabled="isSettingTemp">
-        {{ isSettingTemp ? 'Setze...' : 'Temperatur setzen' }}
-      </button>
-      <p v-if="tempSuccess" class="success-message">Zieltemperatur erfolgreich gesetzt!</p>
-      <p v-if="tempError" class="error-message">{{ tempError }}</p>
-    </div>
+    <!-- Modern System Control using new components -->
+    <SystemControl />
 
     <!-- Holiday Mode Control -->
     <div class="control-section">
@@ -91,30 +70,6 @@
       <p v-if="ecoMode.error" class="error-message">{{ ecoMode.error }}</p>
     </div>
 
-    <!-- Force Hot Water Control -->
-    <div class="control-section">
-      <h2>🔥 Force Hot Water / Warmwasser Zwang</h2>
-      <div class="input-group">
-        <label>Zieltemperatur Warmwasser (°C):</label>
-        <input 
-          type="number" 
-          v-model.number="hotWater.targetTemp" 
-          step="1" 
-          min="40" 
-          max="60" 
-        />
-      </div>
-      <div class="button-group">
-        <button @click="forceHotWater" :disabled="hotWater.loading">
-          {{ hotWater.loading ? 'Wird aktiviert...' : 'Warmwasser forcieren' }}
-        </button>
-        <button @click="stopForceHotWater" :disabled="hotWater.loading" class="btn-secondary">
-          Zwang beenden
-        </button>
-      </div>
-      <p v-if="hotWater.success" class="success-message">{{ hotWater.successMessage }}</p>
-      <p v-if="hotWater.error" class="error-message">{{ hotWater.error }}</p>
-    </div>
 
   </div>
 </template>
@@ -123,6 +78,7 @@
 import { ref, onMounted } from 'vue';
 import { setParameter, getParameters, getTimePrograms, updateTimeProgram } from '@/api/htrest';
 import Spinner from '@/components/shared/Spinner.vue';
+import SystemControl from '@/components/controls/SystemControl.vue';
 
 const targetTemperature = ref(21.0);
 const currentTargetTemp = ref(21.0);

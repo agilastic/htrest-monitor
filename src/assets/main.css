@@ -1,6 +1,38 @@
 @import './base.css';
 @import './components.css';
 
+/* CSS Variables for component theming */
+:root {
+  /* Color palette */
+  --color-primary: #4CAF50;
+  --color-secondary: #FFC107;
+  --color-danger: #F44336;
+  --color-background: #ffffff;
+  --color-text: #333333;
+  --color-text-secondary: #666666;
+  --color-border: #e0e0e0;
+  
+  /* Toggle switch colors */
+  --toggle-bg-off: #ccc;
+  --toggle-bg-on: var(--color-primary);
+  --toggle-circle: #fff;
+  
+  /* Slider colors */
+  --slider-track: #e0e0e0;
+  --slider-thumb: var(--color-primary);
+}
+
+/* Dark mode support */
+.dark-mode {
+  --color-background: #212121;
+  --color-text: #f0f0f0;
+  --color-text-secondary: #b0b0b0;
+  --color-border: #444;
+  --toggle-bg-off: #555;
+  --toggle-bg-on: #1B5E20;
+  --slider-track: #555;
+}
+
 #app {
   max-width: 100%;
  /* margin: 0 auto;*/

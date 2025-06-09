@@ -133,7 +133,7 @@ The frontend components are organized into logical directories for maintainabili
 -   `components/controls/`: Houses components for managing system control operations.
 -   `components/dashboard/`: Includes components for displaying live monitoring data.
 -   `components/parameters/`: Manages components for parameter viewing and editing.
--   `components/shared/`: A collection of reusable UI components used throughout the application.
+-   `components/shared/`: A collection of reusable UI components used throughout the application, including `ToggleSwitch.vue` and `SliderInput.vue` for modern control interfaces.
 
 ## Getting Started
 
